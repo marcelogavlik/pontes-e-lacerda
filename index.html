@@ -510,7 +510,7 @@ $('grupoVer').innerHTML = D.vereadores.filter(function(v){return total(v)>0;}).s
   var el=$('emBox'), ems=D.docs.filter(function(d){return d.g==='emenda';});
   var com=ems.filter(function(d){return d.em;});
   if(!ems.length){ el.innerHTML='<div class="vazio">Nenhuma emenda individual registrada.</div>'; return; }
-  if(!com.length){ el.innerHTML='<div class="vazio">'+ems.length+' emendas registradas. Os valores ainda estão sendo lidos dos documentos oficiais.</div>'; return; }
+  if(!com.length){ el.innerHTML='<div class="vazio">'+ems.length+' emenda(s) registrada(s) no sistema da Câmara. '+(D.sistema==='SAPL'?'Este site ainda não lê o valor de cada uma: abra a emenda no link para ver o documento.':'Os valores ainda estão sendo lidos dos documentos oficiais.')+'</div><ul class="lista">'+ems.map(function(d){return itemDoc(d);}).join('')+'</ul>'; return; }
   var cat={}, tot=0, porAno={}, linhasN=com.reduce(function(s,d){return s+d.em.length;},0);
   com.forEach(function(d){ d.em.forEach(function(e){ cat[e.c]=(cat[e.c]||0)+e.v; tot+=e.v; var a=d.d.slice(0,4); porAno[a]=(porAno[a]||0)+e.v; }); });
   var ks=Object.keys(cat).sort(function(a,b){return cat[b]-cat[a];}), mx=cat[ks[0]]||1;
